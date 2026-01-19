@@ -88,6 +88,24 @@ body::before{
   margin: 0 0 8px 0;
   font-size: clamp(22px, 3.4vw, 34px);
   letter-spacing: -0.02em;
+
+  /* ⬇️ 로고 + 텍스트 정렬 */
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title::before{
+  content: "";
+  width: 42px;
+  height: 42px;
+
+  background-image: url("./assets/yongin-seongseo-logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  flex-shrink: 0;
 }
 
 .subtitle{
@@ -285,4 +303,9 @@ button:active{ transform: translateY(1px); }
   .row{ grid-template-columns: 1fr; }
   .valueGroup{ flex-wrap: wrap; justify-content: flex-start; }
   .value{ width: 100%; }
+  .title::before{
+    width: 34px;
+    height: 34px;
+      }
 }
+
