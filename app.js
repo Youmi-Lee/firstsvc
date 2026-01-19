@@ -8,6 +8,7 @@
     { studentNo: "20251235", name: "김철수", googleId: "20251235@yssm.school" },
   ];
 
+ const inko = window.Inko ? new window.Inko() : null;
   const $ = (sel) => document.querySelector(sel);
 
   const form = $("#searchForm");
@@ -60,14 +61,30 @@
     return String(name).trim().replace(/\s+/g, "");
   }
 
-  function findAccount(studentNo, name) {
-    const no = String(studentNo).trim();
-    const nm = normalizeName(name);
+  function buildNameCandidates(rawName) {
+  const original = normalizeName(rawName);
 
-    return ACCOUNTS.find(
-      (a) => String(a.studentNo).trim() === no && normalizeName(a.name) === nm
-    );
-  }
+  // Inko가 없으면 원본만
+  if (!inko) return [original];
+
+  // 영타로 친 한글을 한글로 변환
+  const converted = normalizeName(inko.en2ko(rawName));
+
+  // 중복 제거
+  return Array.from(new Set([original, converted]));
+}
+
+
+  function findAccount(studentNo, name) {
+  const no = String(studentNo).trim();
+  const candidates = buildNameCandidates(name);
+
+  return ACCOUNTS.find((a) => {
+    const accountName = normalizeName(a.name);
+    return String(a.studentNo).trim() === no && candidates.includes(accountName);
+  });
+}
+
 
   async function copyToClipboard(text) {
     try {
