@@ -1,0 +1,288 @@
+/* =========================
+   용인성서중학교 느낌의 차분한 학교 UI
+   - 로고 워터마크 배경(body::before)
+   - 카드형 레이아웃
+   ========================= */
+
+:root{
+  --bg: #f4f7fb;
+  --surface: rgba(255,255,255,.86);
+  --surface-strong: rgba(255,255,255,.94);
+  --line: rgba(17, 24, 39, .10);
+
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, .68);
+
+  --primary: #1f5aa6;       /* 학교 느낌의 차분한 블루 */
+  --primary-2: #2a7abf;     /* 버튼 호버 */
+  --accent: #1b8a5a;        /* 포인트(성장/교육 느낌) */
+
+  --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+  --shadow-sm: 0 10px 28px rgba(15, 23, 42, .10);
+
+  --radius: 18px;
+  --radius-sm: 12px;
+
+  --focus: 0 0 0 4px rgba(31, 90, 166, .18);
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 15% 10%, rgba(31,90,166,.10), transparent 55%),
+              radial-gradient(900px 500px at 85% 25%, rgba(27,138,90,.10), transparent 55%),
+              linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
+  overflow-x: hidden;
+}
+
+/* 로고 워터마크 레이어 */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  /* 🔽 로고 파일을 여기에 넣으면 배경에 깔림 */
+  background-image:
+    radial-gradient(800px 420px at 25% 18%, rgba(31,90,166,.10), transparent 60%),
+    radial-gradient(650px 360px at 80% 35%, rgba(27,138,90,.10), transparent 62%),
+    url("./assets/yongin-seongseo-logo.png");
+
+  background-repeat: no-repeat;
+  background-position:
+    0% 0%,
+    100% 0%,
+    50% 22%;
+  background-size:
+    900px 520px,
+    760px 460px,
+    min(520px, 72vw);
+
+  /* 워터마크처럼 은은하게 */
+  opacity: .14;
+  filter: blur(.2px);
+  transform: translateZ(0);
+}
+
+/* 전체 래퍼 */
+.app{
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 48px 18px;
+}
+
+.header{
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.title{
+  margin: 0 0 8px 0;
+  font-size: clamp(22px, 3.4vw, 34px);
+  letter-spacing: -0.02em;
+}
+
+.subtitle{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.main{
+  width: min(820px, 100%);
+  display: grid;
+  gap: 16px;
+}
+
+/* 카드 */
+.card{
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.cardTitle{
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.field{
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+label{
+  font-size: 13px;
+  color: var(--muted);
+}
+
+input{
+  width: 100%;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, .16);
+  background: var(--surface-strong);
+  padding: 0 12px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .08s ease;
+}
+
+input::placeholder{ color: rgba(15, 23, 42, .40); }
+
+input:focus{
+  border-color: rgba(31, 90, 166, .45);
+  box-shadow: var(--focus);
+}
+
+.actions{
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button{
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  padding: 0 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+button:active{ transform: translateY(1px); }
+
+#searchBtn{
+  flex: 1;
+  color: #fff;
+  background: linear-gradient(180deg, var(--primary) 0%, #194b8b 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+#searchBtn:hover{
+  background: linear-gradient(180deg, var(--primary-2) 0%, var(--primary) 100%);
+}
+
+.secondary{
+  min-width: 110px;
+  background: rgba(255,255,255,.7);
+  border-color: rgba(15, 23, 42, .14);
+  color: var(--text);
+}
+
+.secondary:hover{
+  border-color: rgba(15, 23, 42, .22);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
+}
+
+.helper{
+  margin: 12px 0 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* 상태 메시지 */
+.status{
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, .12);
+  background: rgba(255,255,255,.65);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 결과 영역 */
+.result{
+  display: grid;
+  gap: 10px;
+}
+
+.row{
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, .10);
+  background: rgba(255,255,255,.72);
+}
+
+.label{
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.valueGroup{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.value{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, .06);
+  border: 1px solid rgba(15, 23, 42, .08);
+  overflow-x: auto;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.value.masked{
+  letter-spacing: .18em;
+}
+
+.mini{
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, .14);
+  background: rgba(255,255,255,.75);
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.mini:hover{
+  border-color: rgba(31, 90, 166, .30);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, .08);
+}
+
+.note{
+  margin: 2px 0 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.footer{
+  margin-top: 16px;
+  color: rgba(15, 23, 42, .50);
+}
+
+/* 반응형 */
+@media (max-width: 520px){
+  .actions{ flex-direction: column; }
+  .secondary{ width: 100%; }
+  .row{ grid-template-columns: 1fr; }
+  .valueGroup{ flex-wrap: wrap; justify-content: flex-start; }
+  .value{ width: 100%; }
+}
