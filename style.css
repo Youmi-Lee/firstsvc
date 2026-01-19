@@ -84,15 +84,32 @@ body::before{
   margin-bottom: 18px;
 }
 
-.title{
-  margin: 0 0 8px 0;
-  font-size: clamp(22px, 3.4vw, 34px);
-  letter-spacing: -0.02em;
+.titleLink,
+.titleLink:visited,
+.titleLink:hover,
+.titleLink:active{
+  color: inherit;          /* 링크 색 제거 */
+  text-decoration: none;   /* 밑줄 제거 */
+}
 
-  /* ⬇️ 로고 + 텍스트 정렬 */
+/* 제목 정렬 유지 */
+.titleLink{
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;         /* 마우스만 올리면 클릭 가능 인지 */
+}
+
+/* 마우스 올려도 변화 최소화 */
+.titleLink:hover{
+  opacity: 1;
+}
+
+/* 키보드 접근성은 유지하되 티 안 나게 */
+.titleLink:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(31, 90, 166, .18);
+  border-radius: 8px;
 }
 
 .title::before{
